@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capacitor Dialog Plugin Example</title>
+  <!-- Include the Capacitor Core JavaScript library -->
+  
+  <script>
+    // Function to show a Capacitor Dialog alert using pure JavaScript
+    function showAlert() {
+      Capacitor.Plugins.Share.share({
+        title: 'See cool stuff',
+        text: 'Really awesome thing you need to see right meow',
+        url: 'http://ionicframework.com/',
+        dialogTitle: 'Share with buddies',
+      });
+    }
+
+    // Share text only
+
+    function shareText() {
+      Capacitor.Plugins.Share.share({
+        text: 'Really awesome thing you need to see right meow',
+      });
+    }
+
+    function shareUrl() {
+      Capacitor.Plugins.Share.share({
+        text: 'Really awesome thing you need to see right meow',
+      });
+    }
+
+    async function sharePhoto() {
+      const photo = await Capacitor.Plugins.Camera.getPhoto(options);
+        await Share.share({
+          url: photo.path,
+        });
+    }
+
+    async function assignData() {
+      document.getElementById("id1").innerText = await Capacitor.Plugins.Device.getBatteryInfo();
+      console.log('fgd')
+      console.log(Capacitor.Plugins.Device.getBatteryInfo())
+    }
+
+    const logDeviceInfo = async () => {
+      const info = await Capacitor.Plugins.Device.getInfo();
+      const parentElement = document.getElementById("id1");
+      parentElement.innerHTML = "";
+
+      const newSpan = document.createElement("h2");
+      newSpan.textContent = 'DEvice Info';
+      parentElement.appendChild(newSpan);
+
+      for (let key in info) {
+        const newSpan = document.createElement("div");
+        newSpan.textContent = key + ": " + info[key];
+        parentElement.appendChild(newSpan);
+      }
+    };
+
+    const getBattryData = async () => {
+      const info = await Capacitor.Plugins.Device.getBatteryInfo();
+      const parentElement = document.getElementById("id1");
+      parentElement.innerHTML = "";
+
+      const newSpan = document.createElement("h2");
+      newSpan.textContent = 'Battery Info';
+      parentElement.appendChild(newSpan);
+
+      for (let key in info) {
+        const newSpan = document.createElement("div");
+        newSpan.textContent = key + ": " + info[key];
+        parentElement.appendChild(newSpan);
+      }
+    };
+
+    const getDeviceID = async () => {
+      const info = await Capacitor.Plugins.Device.getId();
+      const parentElement = document.getElementById("id1");
+
+      parentElement.innerHTML = "";
+
+      const newSpan = document.createElement("h2");
+      newSpan.textContent = 'Device Id';
+      parentElement.appendChild(newSpan);
+
+      for (let key in info) {
+        const newSpan = document.createElement("div");
+        newSpan.textContent = key + ": " + info[key];
+        parentElement.appendChild(newSpan);
+      }
+    };
+
+    const getLanguge = async () => {
+      const info = await Capacitor.Plugins.Device.getLanguageCode();
+      const parentElement = document.getElementById("id1");
+
+      parentElement.innerHTML = "";
+
+      const newSpan = document.createElement("h2");
+      newSpan.textContent = 'language Code';
+      parentElement.appendChild(newSpan);
+
+      for (let key in info) {
+        const newSpan = document.createElement("div");
+        newSpan.textContent = key + ": " + info[key];
+        parentElement.appendChild(newSpan);
+      }
+    };
+    
+    const getLanguageTag = async () => {
+      const info = await Capacitor.Plugins.Device.getLanguageTag();
+      const parentElement = document.getElementById("id1");
+
+      parentElement.innerHTML = "";
+
+      const newSpan = document.createElement("h2");
+      newSpan.textContent = 'language Code';
+      parentElement.appendChild(newSpan);
+
+      for (let key in info) {
+        const newSpan = document.createElement("div");
+        newSpan.textContent = key + ": " + info[key];
+        parentElement.appendChild(newSpan);
+      }
+    };
+
+    const getNetwork = async () => {
+      const info = await Capacitor.Plugins.Network.getStatus();
+      const parentElement = document.getElementById("id1");
+
+      parentElement.innerHTML = "";
+
+      const newSpan = document.createElement("h2");
+      newSpan.textContent = 'Network Sts';
+      parentElement.appendChild(newSpan);
+
+      for (let key in info) {
+        const newSpan = document.createElement("div");
+        newSpan.textContent = key + ": " + info[key];
+        parentElement.appendChild(newSpan);
+      }
+    };
+
+    const setStasbar = async (idss) => {
+      if (idss === 1) {
+        Capacitor.Plugins.StatusBar.show()
+      } else if (idss === 2) {
+        Capacitor.Plugins.StatusBar.hide()
+      } else if (idss === 3) {
+        Capacitor.Plugins.StatusBar.setStyle({ style: Style.Light});
+      } else if (idss === 4) {
+        Capacitor.Plugins.StatusBar.setStyle({ style: Style.Dark  });
+      }
+    };
+  </script>
+</head>
+<body style="height: 100%; overflow: scroll;">
+  <h1>Capacitor Dialog Plugin Example</h1>
+
+  <!-- Button to trigger the Capacitor Dialog -->
+  <button onclick="showAlert()">Share All</button>
+  <button onclick="shareText()">Share text</button>
+  <button onclick="shareUrl()">Share url</button>
+  <button onclick="sharePhoto()">Share photo</button>
+
+  <button onclick="logDeviceInfo()">Show Device Data</button>
+  <button onclick="getBattryData()">Show Battery Data</button>
+  <button onclick="getDeviceID()">Show Device Id</button>
+  <button onclick="getLanguge()">Show Language Code</button>
+  <button onclick="getLanguageTag()">Show Language Tag</button>
+
+  <button onclick="getNetwork()">Net work Sts</button>
+
+  <button onclick="setStasbar(1)">show status bar</button>
+  <button onclick="setStasbar(2)">hide status bar</button>
+  <button onclick="setStasbar(3)">set status bar light color</button>
+  <button onclick="setStasbar(4)">set status bar dark color</button>
+
+  <div id="id1"></div>
+
+</body>
+</html>
